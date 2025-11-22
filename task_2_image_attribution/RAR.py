@@ -1,9 +1,35 @@
+"""
+================================================================================
+RAR.PY - OPTIMIZED IMAGE GENERATION FOR 4x A100 GPUs
+================================================================================
+
+This script generates RAR images for data augmentation with the following optimizations:
+
+1. DEFAULT: Generates 5000 images (optimized for training)
+2. DIVERSITY: Uses 50 diverse ImageNet classes for maximum variety
+3. PARALLELIZATION: Uses 4 processes (1 per GPU) for ~4x speedup
+4. RANDOM SEEDS: Uses random seeds for each image to ensure variety
+
+USAGE:
+    python RAR.py
+    
+    This will generate 5000 images in ~2-3 hours on 4x A100 GPUs (parallelized).
+    
+    To generate fewer images, use: python RAR.py --num_images 2000
+
+OUTPUT:
+    Images saved to: outputs_rar/
+    Format: rar_rar_xl_cls{imagenet_class}_{index}.png
+"""
+
 import os
 import sys
 import subprocess
 import shutil
 import venv
 import json
+import random
+import multiprocessing
 from pathlib import Path
 
 
@@ -13,10 +39,22 @@ REPO_DIR = ROOT / "1d-tokenizer"
 OUT_DIR = ROOT / "outputs_rar"
 WEIGHT_DIR = ROOT / "weights"
 
-# Defaults for direct run (no terminal args needed)
+# Defaults for direct run (no terminal args needed) - OPTIMIZED
 DEFAULT_CLASS_ID = 207
-DEFAULT_CLASS_IDS = [1,3,5,9]  # e.g., [207, 282, 404] to generate multiple by default
-DEFAULT_NUM_IMAGES = 1
+# Use 50 diverse ImageNet classes for better variety (same as VAR.py)
+DEFAULT_CLASS_IDS = [
+    207, 483, 701, 970,  # Original classes
+    15, 23, 45, 67, 89,  # Additional diverse classes
+    101, 123, 145, 167, 189,
+    201, 223, 245, 267, 289,
+    301, 323, 345, 367, 389,
+    401, 423, 445, 467, 489,
+    501, 523, 545, 567, 589,
+    601, 623, 645, 667, 689,
+    701, 723, 745, 767, 789,
+    801, 823, 845, 867, 889
+]
+DEFAULT_NUM_IMAGES = 5000  # Optimized for training (was 1)
 DEFAULT_RAR_SIZE = "rar_xl"  # one of: rar_b, rar_l, rar_xl, rar_xxl
 
 
@@ -112,12 +150,26 @@ print(path)
     return p
 
 
-def generate_imagenet_class(venv_python: Path, class_id: int, rar_size: str = "rar_xl", num_images: int = 1):
+def generate_imagenet_class(venv_python: Path, class_id: int, rar_size: str = "rar_xl", 
+                            num_images: int = 1, gpu_id: int = 0, start_idx: int = 0, 
+                            seed_offset: int = 0):
+    """
+    Generate RAR images for a specific ImageNet class.
+    
+    Args:
+        venv_python: Python executable in venv
+        class_id: ImageNet class ID
+        rar_size: RAR model size
+        num_images: Number of images to generate
+        gpu_id: GPU device ID to use (for parallelization)
+        start_idx: Starting index for image naming
+        seed_offset: Offset for random seed (for diversity)
+    """
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     WEIGHT_DIR.mkdir(parents=True, exist_ok=True)
 
     # Ensure weights are present
-    print("[weights] Downloading tokenizer and RAR weights if missing...")
+    print(f"[GPU {gpu_id}] Downloading tokenizer and RAR weights if missing...")
     tok_path = hf_download(venv_python, "fun-research/TiTok", "maskgit-vqgan-imagenet-f16-256.bin", WEIGHT_DIR)
     rar_bin = f"{rar_size}.bin"
     rar_path = hf_download(venv_python, "yucornetto/RAR", rar_bin, WEIGHT_DIR)
@@ -127,13 +179,15 @@ def generate_imagenet_class(venv_python: Path, class_id: int, rar_size: str = "r
 import sys
 from pathlib import Path
 import traceback
+import random
+import numpy as np
+import torch
 
 REPO_DIR = Path({str(REPO_DIR)!r})
 WEIGHT_DIR = Path({str(WEIGHT_DIR)!r})
 OUT_DIR = Path({str(OUT_DIR)!r})
 
 try:
-    import torch
     from PIL import Image
     if str(REPO_DIR) not in sys.path:
         sys.path.insert(0, str(REPO_DIR))
@@ -142,7 +196,6 @@ try:
     from modeling.rar import RAR
 
     cfg_map = {{
-        
         'rar_xl': dict(hidden_size=1280, layers=32, heads=16, mlp=5120),
     }}
     rar_size = {rar_size!r}
@@ -156,7 +209,10 @@ try:
     config.model.generator.intermediate_size = cfg_map[rar_size]['mlp']
     config.model.vq_model.pretrained_tokenizer_weight = str(WEIGHT_DIR / 'maskgit-vqgan-imagenet-f16-256.bin')
 
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    # Use specific GPU for this process
+    gpu_id = {gpu_id}
+    device = f'cuda:{{gpu_id}}' if torch.cuda.is_available() and gpu_id < torch.cuda.device_count() else 'cuda' if torch.cuda.is_available() else 'cpu'
+    print(f"[GPU {{gpu_id}}] Using device: {{device}}")
 
     tokenizer = PretrainedTokenizer(config.model.vq_model.pretrained_tokenizer_weight)
     generator = RAR(config)
@@ -167,8 +223,20 @@ try:
 
     cls_id = int({class_id})
     num_images = int({num_images})
+    start_idx = int({start_idx})
+    seed_offset = int({seed_offset})
+    
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+    
+    print(f"[GPU {{gpu_id}}] Generating {{num_images}} images for class {{cls_id}} (starting at index {{start_idx}})")
+    
     for i in range(num_images):
+        # Use different seed for each image (for diversity)
+        img_seed = seed_offset + start_idx + i
+        torch.manual_seed(img_seed)
+        random.seed(img_seed)
+        np.random.seed(img_seed)
+        
         imgs = demo_util.sample_fn(
             generator=generator,
             tokenizer=tokenizer,
@@ -178,10 +246,15 @@ try:
             guidance_scale_pow=1.5,
             device=device,
         )
-        Image.fromarray(imgs[0]).save(OUT_DIR / f'rar_{{rar_size}}_cls{{cls_id}}_{{i}}.png')
-    print('DONE')
+        img_idx = start_idx + i
+        Image.fromarray(imgs[0]).save(OUT_DIR / f'rar_{{rar_size}}_cls{{cls_id}}_{{img_idx:05d}}.png')
+        
+        if (i + 1) % 100 == 0:
+            print(f"[GPU {{gpu_id}}] Generated {{i+1}}/{{num_images}} images for class {{cls_id}}")
+    
+    print(f"[GPU {{gpu_id}}] DONE: Generated {{num_images}} images for class {{cls_id}}")
 except Exception:
-    print('[ERROR] Generation failed:')
+    print(f'[GPU {{gpu_id}}] [ERROR] Generation failed:')
     traceback.print_exc()
     raise
 """
@@ -222,6 +295,12 @@ def parse_args():
     return args
 
 
+def generate_worker(args_tuple):
+    """Worker function for parallel generation on a specific GPU."""
+    (venv_python, class_id, rar_size, num_images, gpu_id, start_idx, seed_offset) = args_tuple
+    generate_imagenet_class(venv_python, class_id, rar_size, num_images, gpu_id, start_idx, seed_offset)
+
+
 def main():
     args = parse_args()
 
@@ -238,12 +317,102 @@ def main():
         run(["git", "clone", "https://github.com/bytedance/1d-tokenizer", str(REPO_DIR)])
 
     vpy = Path(sys.executable)
+    
+    # Determine number of GPUs available
+    try:
+        import torch  # type: ignore
+        num_gpus = torch.cuda.device_count() if torch.cuda.is_available() else 1
+    except ImportError:
+        num_gpus = 1
+    
+    print(f"[info] Detected {num_gpus} GPU(s) available")
+    
+    # Use diverse classes if not specified
+    if args.class_ids is None:
+        args.class_ids = DEFAULT_CLASS_IDS[:50]  # Use first 50 diverse classes
+    
+    # Calculate total images to generate
+    total_images = args.num_images
+    num_classes = len(args.class_ids) if args.class_ids else 1
+    
     if args.class_ids:
-        for cid in args.class_ids:
-            generate_imagenet_class(vpy, class_id=int(cid), rar_size=args.rar_size, num_images=args.num_images)
+        # Generate images for multiple classes
+        images_per_class = total_images // num_classes
+        remaining_images = total_images % num_classes
+        
+        print(f"[info] Generating {total_images} images across {num_classes} classes")
+        print(f"[info] ~{images_per_class} images per class (with {remaining_images} extra)")
+        
+        # Use parallelization if multiple GPUs available
+        if num_gpus > 1 and total_images > 100:
+            print(f"[info] Using {num_gpus} GPUs for parallel generation")
+            
+            # Distribute work across GPUs
+            all_tasks = []
+            img_counter = 0
+            initial_seed = random.randint(0, 2**31 - 1)
+            
+            for class_idx, cid in enumerate(args.class_ids):
+                class_images = images_per_class + (1 if class_idx < remaining_images else 0)
+                
+                # Distribute images for this class across GPUs
+                images_per_gpu = class_images // num_gpus
+                extra_images = class_images % num_gpus
+                
+                for gpu_id in range(num_gpus):
+                    gpu_images = images_per_gpu + (1 if gpu_id < extra_images else 0)
+                    if gpu_images > 0:
+                        start_idx = img_counter
+                        seed_offset = initial_seed + img_counter
+                        all_tasks.append((vpy, int(cid), args.rar_size, gpu_images, gpu_id, start_idx, seed_offset))
+                        img_counter += gpu_images
+            
+            # Run in parallel using multiprocessing
+            with multiprocessing.Pool(processes=num_gpus) as pool:
+                pool.map(generate_worker, all_tasks)
+        else:
+            # Sequential generation (single GPU or small number of images)
+            print(f"[info] Using sequential generation (single process)")
+            img_counter = 0
+            initial_seed = random.randint(0, 2**31 - 1)
+            
+            for class_idx, cid in enumerate(args.class_ids):
+                class_images = images_per_class + (1 if class_idx < remaining_images else 0)
+                start_idx = img_counter
+                seed_offset = initial_seed + img_counter
+                generate_imagenet_class(vpy, class_id=int(cid), rar_size=args.rar_size, 
+                                      num_images=class_images, gpu_id=0, 
+                                      start_idx=start_idx, seed_offset=seed_offset)
+                img_counter += class_images
     else:
-        generate_imagenet_class(vpy, class_id=args.class_id, rar_size=args.rar_size, num_images=args.num_images)
-    print(f"[done] Images saved to {OUT_DIR}")
+        # Single class generation
+        print(f"[info] Generating {total_images} images for class {args.class_id}")
+        if num_gpus > 1 and total_images > 100:
+            # Distribute across GPUs
+            images_per_gpu = total_images // num_gpus
+            extra_images = total_images % num_gpus
+            initial_seed = random.randint(0, 2**31 - 1)
+            
+            all_tasks = []
+            img_counter = 0
+            for gpu_id in range(num_gpus):
+                gpu_images = images_per_gpu + (1 if gpu_id < extra_images else 0)
+                if gpu_images > 0:
+                    start_idx = img_counter
+                    seed_offset = initial_seed + img_counter
+                    all_tasks.append((vpy, args.class_id, args.rar_size, gpu_images, gpu_id, start_idx, seed_offset))
+                    img_counter += gpu_images
+            
+            with multiprocessing.Pool(processes=num_gpus) as pool:
+                pool.map(generate_worker, all_tasks)
+        else:
+            # Single GPU
+            initial_seed = random.randint(0, 2**31 - 1)
+            generate_imagenet_class(vpy, class_id=args.class_id, rar_size=args.rar_size, 
+                                  num_images=total_images, gpu_id=0, 
+                                  start_idx=0, seed_offset=initial_seed)
+    
+    print(f"[done] All images saved to {OUT_DIR}")
 
 
 if __name__ == "__main__":
