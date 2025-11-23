@@ -1,0 +1,936 @@
+{
+  "runs": [
+    {
+      "run_id": 1,
+      "timestamp": "2025-11-23T02:36:49.984076",
+      "duration_seconds": 1322.5365989208221,
+      "config": {
+        "epsilon_min": 1.5,
+        "epsilon_max": 8.0,
+        "binary_search_steps": 2,
+        "pgd_steps": 30,
+        "num_restarts": 2,
+        "alpha_factor": 2.5,
+        "momentum": 0.9,
+        "use_input_diversity": true
+      },
+      "stats": {
+        "total_images": 100,
+        "successful": 100,
+        "failed": 0,
+        "success_rate": 100.0,
+        "avg_l2_all": 3.120678772926331,
+        "avg_l2_success": 3.120678772926331,
+        "avg_l2_failed": 0,
+        "avg_margin_all": 13.945371871218086,
+        "avg_margin_success": 13.945371871218086,
+        "avg_margin_failed": 0,
+        "avg_epsilon": 3.125,
+        "min_l2": 3.0098249912261963,
+        "max_l2": 3.124999523162842
+      },
+      "per_image_results": [
+        {
+          "image_id": 0,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 15.111194133758545,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 1,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 23.8261399269104,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 2,
+          "l2": 3.1249914169311523,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 8.350200891494751,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 3,
+          "l2": 3.1249990463256836,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 6.871519565582275,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 4,
+          "l2": 3.1190812587738037,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 18.360838294029236,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 5,
+          "l2": 3.124178171157837,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 20.296161890029907,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 6,
+          "l2": 3.1246864795684814,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 11.798712730407715,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 7,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 15.963186740875244,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 8,
+          "l2": 3.1128857135772705,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 19.738572597503662,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 9,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 16.132507801055908,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 10,
+          "l2": 3.124999523162842,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 11.754724740982056,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 11,
+          "l2": 3.114178419113159,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 24.621599674224854,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 12,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 13.402970910072327,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 13,
+          "l2": 3.1190240383148193,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 5.245512053370476,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 14,
+          "l2": 3.124999523162842,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 8.015415474772453,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 15,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 7.502888202667236,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 16,
+          "l2": 3.1244823932647705,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 17.54248332977295,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 17,
+          "l2": 3.124892473220825,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 12.78175687789917,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 18,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 20.486078023910522,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 19,
+          "l2": 3.111133098602295,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 12.17654299736023,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 20,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 10.965303659439087,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 21,
+          "l2": 3.07741379737854,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 18.259515643119812,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 22,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 20.81213092803955,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 23,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 11.212052822113037,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 24,
+          "l2": 3.1093952655792236,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 7.879703044891357,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 25,
+          "l2": 3.1249990463256836,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 6.543813467025757,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 26,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 13.19685959815979,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 27,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 22.393677234649658,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 28,
+          "l2": 3.124999523162842,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 15.57582688331604,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 29,
+          "l2": 3.1209068298339844,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 22.150938510894775,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 30,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 21.469709157943726,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 31,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 6.753591030836105,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 32,
+          "l2": 3.122504472732544,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 13.36795687675476,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 33,
+          "l2": 3.1243855953216553,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 11.49127721786499,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 34,
+          "l2": 3.1249990463256836,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 6.4238187074661255,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 35,
+          "l2": 3.108267068862915,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 17.01932954788208,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 36,
+          "l2": 3.1171715259552,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 15.88443872332573,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 37,
+          "l2": 3.1249990463256836,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 12.061592102050781,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 38,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 22.317822456359863,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 39,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 20.228033304214478,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 40,
+          "l2": 3.124999523162842,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 15.949581921100616,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 41,
+          "l2": 3.1103947162628174,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 10.335797786712646,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 42,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 11.00960710644722,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 43,
+          "l2": 3.119580030441284,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 10.576831698417664,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 44,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 14.15710163116455,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 45,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 5.510498762130737,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 46,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 17.34137201309204,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 47,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 22.505388498306274,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 48,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 6.345318138599396,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 49,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 14.615546941757202,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 50,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 15.243281215429306,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 51,
+          "l2": 3.12459397315979,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 18.05756974220276,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 52,
+          "l2": 3.120201587677002,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 12.704749345779419,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 53,
+          "l2": 3.1218793392181396,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 17.6283997297287,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 54,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 14.07841819524765,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 55,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 14.505631983280182,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 56,
+          "l2": 3.1249990463256836,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 11.169677972793579,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 57,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 12.308253765106201,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 58,
+          "l2": 3.1249990463256836,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 6.051955342292786,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 59,
+          "l2": 3.1249988079071045,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 11.888492822647095,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 60,
+          "l2": 3.112762212753296,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 9.158681392669678,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 61,
+          "l2": 3.1249990463256836,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 8.959798336029053,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 62,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 9.022376962006092,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 63,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 14.122287690639496,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 64,
+          "l2": 3.124988079071045,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 11.509665966033936,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 65,
+          "l2": 3.1245779991149902,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 7.848473072052002,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 66,
+          "l2": 3.1249990463256836,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 5.740871727466583,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 67,
+          "l2": 3.1249990463256836,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 13.307643294334412,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 68,
+          "l2": 3.1249990463256836,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 9.569560766220093,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 69,
+          "l2": 3.1249990463256836,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 9.522760152816772,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 70,
+          "l2": 3.124999523162842,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 17.5682293176651,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 71,
+          "l2": 3.124450206756592,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 14.52395486831665,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 72,
+          "l2": 3.1243724822998047,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 10.591249346733093,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 73,
+          "l2": 3.1237826347351074,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 22.982958793640137,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 74,
+          "l2": 3.116334915161133,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 20.515930652618408,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 75,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 17.615063905715942,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 76,
+          "l2": 3.124987840652466,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 5.43882942199707,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 77,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 11.710372686386108,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 78,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 20.2882080078125,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 79,
+          "l2": 3.1201202869415283,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 8.4827241897583,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 80,
+          "l2": 3.0098249912261963,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 7.650413379073143,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 81,
+          "l2": 3.1248998641967773,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 12.597392320632935,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 82,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 19.080150604248047,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 83,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 8.963698387145996,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 84,
+          "l2": 3.061683177947998,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 10.547059178352356,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 85,
+          "l2": 3.0784599781036377,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 22.316186904907227,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 86,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 16.485425114631653,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 87,
+          "l2": 3.1246957778930664,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 12.131417036056519,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 88,
+          "l2": 3.124948740005493,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 12.38999092578888,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 89,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 18.483853578567505,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 90,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 18.252524852752686,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 91,
+          "l2": 3.1230340003967285,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 20.562490224838257,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 92,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 9.806482553482056,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 93,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 25.7408447265625,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 94,
+          "l2": 3.1246745586395264,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 10.60188102722168,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 95,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 15.162084817886353,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 96,
+          "l2": 3.124617099761963,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 12.659369945526123,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 97,
+          "l2": 3.1249992847442627,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 12.406868040561676,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 98,
+          "l2": 3.124370574951172,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 19.996079683303833,
+          "num_restarts_succeeded": 2
+        },
+        {
+          "image_id": 99,
+          "l2": 3.124107599258423,
+          "epsilon": 3.125,
+          "kappa": 0.0,
+          "success": true,
+          "margin": 12.253460884094238,
+          "num_restarts_succeeded": 2
+        }
+      ]
+    }
+  ]
+}
